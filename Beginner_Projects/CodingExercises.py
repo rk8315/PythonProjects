@@ -1,3 +1,7 @@
+#####################
+#       Day 2       #
+#####################
+
 def BMI_Calc():
     height = float(input("Enter your height: "))
     weight = float(input("Enter your weight: "))
@@ -13,3 +17,12 @@ def Life_In_Weeks():
     max_age_in_weeks = 90 * 52
 
     print(f"You have {max_age_in_weeks - user_age_in_weeks} weeks left.")
+
+
+#####################
+#       Day 3       #
+#####################
+
+
+
+
