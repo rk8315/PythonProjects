@@ -1,3 +1,5 @@
+import random
+
 #####################
 #       Day 2       #
 #####################
@@ -71,3 +73,20 @@ def Auto_Pizza_Order():
 
     print(f"Your final bill is: ${final_bill}.")
 
+#####################
+#       Day 4       #
+#####################
+def Coin_Flip():
+    coin_flip = random.randint(0,1)
+    if coin_flip == 1:
+        print("Heads")
+    else:
+        print("Tails")
+
+def Banker_Roulette():
+    names_string = "Bob, Jen, Larry, Moe, Curly, Leo, Monty" # 7
+    names = names_string.split(", ")
+    payer = random.randint(0, len(names) - 1)
+
+    print(f"{names[payer]} is going to buy the meal today!")
+    
