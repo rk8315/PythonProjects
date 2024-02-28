@@ -90,3 +90,40 @@ def Banker_Roulette():
 
     print(f"{names[payer]} is going to buy the meal today!")
     
+#####################
+#       Day 5       #
+#####################
+def avg_student_height():
+    student_heights = input("Enter heights of students separated by a space:\n ").split()
+
+    for n in range(0, len(student_heights)):
+        student_heights[n] = int(student_heights[n])
+    
+    total_height = 0
+    number_of_students = len(student_heights)
+    for student in student_heights:
+        total_height += student
+
+    average_height = round(total_height / number_of_students)
+    print(f"Total height: {total_height}")
+    print(f"Number of students: {number_of_students}")
+    print(f"The average height is {average_height}")
+
+def add_even_numbers():
+    target = int(input("Enter a number bewtween 0 and 1000: "))
+    sum = 0
+    for num in range(0, target + 1, 2):
+        sum += num
+    print(f"The sum of the numbers between 0 and {target} is {sum}")
+
+def FizzBuzz():
+    for num in range(1, 101):
+        if num % 3 == 0 and num % 5 == 0:
+            print("FizzBuzz")
+        elif num % 3 == 0 and num % 5 != 0:
+            print("Fizz")
+        elif num % 3 != 0 and num % 5 == 0:
+            print("Buzz")
+        else:
+            print(num)
+
