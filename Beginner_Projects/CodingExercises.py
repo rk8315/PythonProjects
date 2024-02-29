@@ -1,4 +1,5 @@
 import random
+import math
 
 #####################
 #       Day 2       #
@@ -129,5 +130,23 @@ def FizzBuzz():
 
 
 #####################
-#       Day 7       #
+#       Day 8       #
 #####################
+def greet(name, name2, name3):
+    print(f"Hello {name}")
+    print(f"Hello {name2}")
+    print(f"Hello {name3}")
+
+def paint_calc(height, width, cover=5):
+    number_of_cans = math.ceil((height * width) / cover)
+    print(f"For a room that is {height}x{width}, you will need {number_of_cans} cans of paint.")
+
+def prime_checker(number):
+    is_prime = True
+    for x in range(2, number):
+        if number % x == 0:
+            is_prime = False
+    if is_prime:
+        print(f"{number} is prime")
+    else:
+        print(f"{number} is not prime")
