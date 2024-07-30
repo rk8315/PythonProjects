@@ -37,54 +37,44 @@ def resource_check(menu_ingredients):
             print(f"Sorry, there is not enough {ingredient} for your order.")
             return False
     return True
+
+def transaction_check(menu_item):
+    print("Please insert coins")
+    quarters = int(input("How many quarters?: "))
+    dimes = int(input("How many dimes?: "))
+    nickels = int(input("How many nickels?: "))
+    pennies = int(input("How many pennies?: "))
+    amount_tendered = (quarters * 0.25) + (dimes * 0.10) + (nickels * 0.05) + (pennies * 0.01)
+    if(amount_tendered >= MENU[menu_item]["cost"]):
+        if(amount_tendered == MENU[menu_item]["cost"]):
+            print(f"Here is your {MENU[menu_item]}!")
+        else:
+            change = round(amount_tendered - MENU[menu_item]["cost"], 2)
+            print(f"Here is your {menu_item} and change of ${change}!")
+    else:
+        print("Sorry, that is not enough money. Refund issued.")
+        return False
+    return True
+
+def resource_update(menu_item): 
+    for ingredient in MENU[menu_item]["ingredients"]:
+        resources[ingredient] -=  MENU[menu_item]["ingredients"][ingredient]
+
 #endregion Functions
 
-while True:
-    profit = 0
-    initial_prompt = input("What would you like? (espresso/latte/cappuccino/report): ")
-    if initial_prompt == "espresso":
-        if(resources["coffee"] >= 18):
-            if(resources['water'] >= 50):
-                print("Please insert coins")
-                quarters = int(input("How many quarters?: "))
-                dimes = int(input("How many dimes?: "))
-                nickels = int(input("How many nickels?: "))
-                pennies = int(input("How many pennies?: "))
-                amount_tendered = (quarters * 0.25) + (dimes * 0.10) + (nickels * 0.05) + (pennies * 0.01)
+profit = 0
 
-                if(amount_tendered >= MENU["espresso"]["cost"]):
-                    if(amount_tendered == MENU["espresso"]["cost"]):
-                        print("Here is your espresso!")
-                    else:
-                        change = round(amount_tendered - MENU["espresso"]["cost"], 2)
-                        profit += MENU["espresso"]["cost"]
-                        resources["coffee"] -= 18
-                        resources["water"] -= 50
-                        print(f"Here is your ${change} in change.")
-                else:
-                    print("Sorry, that is not enough money, money refunded.")
-            else:
-                print("Sorry, there is not enough water.")
-        else:
-            print("Sorry, there is not enough coffee.")
-    elif initial_prompt == "latte":
-        if resource_check(MENU["latte"]["ingredients"]):
-            print("latte made")
-    elif initial_prompt == "cappuccino":
-        if(resources["coffee"] >= 24):
-            if(resources["water" >= 250]):
-                if(resources["milk"] >= 100):
-                    print("cappuccino made")
-                else:
-                    print("Sorry, there is not enough milk.")
-            else:
-                print("Sorry, there is not enought water.")
-        else:
-            print("Sorry, there is not enough coffee.")
-    elif initial_prompt == "report":
-        print(f"~ Water: {resources['water']}\n~ Milk: {resources['milk']}\n~ Coffee: {resources['coffee']}\n~ Money: $2")
-    elif initial_prompt == "off":
-        print("turning off coffee machine")
+while True:
+    user_selection = input("What would you like? (espresso/latte/cappuccino/report): ")
+    if user_selection == "report":
+        print(f"~ Water: {resources['water']}ml\n~ Milk: {resources['milk']}ml\n~ Coffee: {resources['coffee']}g\n~ Money: ${profit:.2f}")
+    elif user_selection == "off":
+        print("Turning off coffee machine")
         break
+    elif user_selection == "espresso" or user_selection == "latte" or user_selection == "cappuccino":
+        if resource_check(MENU[user_selection]["ingredients"]):
+            if transaction_check(user_selection):
+                resource_update(user_selection)
+                profit += MENU[user_selection]["cost"]
     else:
-        print("Invalid statement")
+        print("Invalid response.")
